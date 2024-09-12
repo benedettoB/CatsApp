@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import org.benedetto.data.model.Cat
-import org.benedetto.data.remote.CatRepository
+import org.benedetto.data.repository.remote.CatRepository
 import javax.inject.Inject
 
 @HiltViewModel

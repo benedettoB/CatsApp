@@ -2,6 +2,7 @@ package org.benedetto.catsapp.ui
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -11,6 +12,7 @@ import androidx.navigation.navArgument
 import org.benedetto.catsapp.ui.view.CatDetailsScreen
 import org.benedetto.catsapp.ui.view.HomeScreen
 import org.benedetto.catsapp.ui.viewmodel.CatViewModel
+import org.benedetto.catsapp.ui.viewmodel.DbViewModel
 
 @Composable
 fun Navigation (){

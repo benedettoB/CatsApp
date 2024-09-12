@@ -1,4 +1,4 @@
-package org.benedetto.data.remote
+package org.benedetto.data.repository.remote
 import org.benedetto.data.model.Cat
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers

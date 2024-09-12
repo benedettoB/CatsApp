@@ -1,4 +1,4 @@
-package org.benedetto.data.remote
+package org.benedetto.data.repository.remote
 
 import kotlinx.coroutines.flow.Flow
 import org.benedetto.data.model.Cat

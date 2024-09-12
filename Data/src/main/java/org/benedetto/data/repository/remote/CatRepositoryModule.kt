@@ -1,4 +1,4 @@
-package org.benedetto.data.remote
+package org.benedetto.data.repository.remote
 
 import dagger.Binds
 import dagger.Module

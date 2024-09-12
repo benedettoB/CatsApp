@@ -8,6 +8,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -15,10 +19,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberImagePainter
+import org.benedetto.catsapp.ui.viewmodel.DbViewModel
 
 @Composable
-fun CatDetailsScreen(catId: String?, catImageUrl: String?) {
+fun CatDetailsScreen(catId: String?, catImageUrl: String?,  dbViewModel: DbViewModel = hiltViewModel()) {
     MaterialTheme {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -37,58 +43,17 @@ fun CatDetailsScreen(catId: String?, catImageUrl: String?) {
             )
             Spacer(modifier = Modifier.height(16.dp))
             Text(text = "Cat ID: $catId", style = MaterialTheme.typography.bodyMedium)
-        }
-    }
-}
 
-/*
-@Composable
-fun CatDetailsScreen(catId: String?, catImageUrl: String?) {
-    val catViewModel: CatViewModel = viewModel()
-    val isFavorite = remember { mutableStateOf(catViewModel.isFavorite(catId)) }
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        // Display cat details (image, ID, etc.)
-        catImageUrl?.let {
-            Image(
-                painter = rememberImagePainter(it),
-                contentDescription = "Cat Image",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp)
-            )
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Text(text = "Cat ID: $catId", style = MaterialTheme.typography.h6)
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Add to favorites button
-        IconButton(onClick = {
-            isFavorite.value = !isFavorite.value
-            if (isFavorite.value) {
-                catViewModel.addCatToFavorites(catId)
-            } else {
-                catViewModel.removeCatFromFavorites(catId)
+            //////////////
+            if (catId != null) {
+                // UI for displaying the cat details
+                Column {
+                    // Add to favorites button
+                    IconButton(onClick = { dbViewModel.addToFavorites(catId) }) {
+                        Icon(imageVector = Icons.Default.Favorite, contentDescription = "Add to Favorites")
+                    }
+                }
             }
-        }) {
-            Icon(
-                imageVector = if (isFavorite.value) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
-                contentDescription = "Add to Favorites"
-            )
         }
-
-        Text(
-            text = if (isFavorite.value) "Added to favorites" else "Not in favorites",
-            style = MaterialTheme.typography.body1
-        )
     }
 }
-
- */
