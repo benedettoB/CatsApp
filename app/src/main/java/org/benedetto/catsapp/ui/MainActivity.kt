@@ -5,6 +5,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
+import org.benedetto.data.extension.isNetworkAvailable
+import org.benedetto.data.extension.toast
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -12,6 +14,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             Navigation()
+        }
+        if(isNetworkAvailable()){
+            toast("Fetching cats from the network")
+        }else{
+            toast("Connect to the internet to fetch cats")
         }
     }
 }
