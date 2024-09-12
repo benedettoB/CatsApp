@@ -4,13 +4,15 @@ This Cat app uses the public Cats API found here: https://api.thecatapi.com to p
 User can add cat to favorites list by tapping the heart button on the list and/or in the details view
 -The users favorites are stored in a local room database
 
+This is modeled in MVVM pattern 
+
 Click Load More button to pull more cats from cat API
 
 Entire app is built with compose and hilt 
 
 I'm using this app to test new kotlin/android features in jetpack 
 
-This is not meant for production. It's only an example for me to reference and for others curious about what I can do (linkedin etc)
+This app is meant to be an example for me to reference and continue testing/learning (and for others curious about what I can do (linkedin etc))
 
 you can clone this repo by 
 git clone https://github.com/benedettoB/CatsApp.git
