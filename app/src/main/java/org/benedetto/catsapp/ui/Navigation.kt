@@ -4,7 +4,6 @@ import CatDetailsScreen
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -17,8 +16,8 @@ import org.benedetto.catsapp.ui.viewmodel.DbViewModel
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
-    val catViewModel: CatViewModel = viewModel() // CatViewModel
-    val dbViewModel: DbViewModel = hiltViewModel() // DbViewModel for managing favorites
+    val catViewModel: CatViewModel = hiltViewModel()
+    val dbViewModel: DbViewModel = hiltViewModel()
 
     MaterialTheme {
         NavHost(navController = navController, startDestination = "home") {

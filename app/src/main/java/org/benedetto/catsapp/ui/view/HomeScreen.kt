@@ -42,8 +42,8 @@ import java.nio.charset.StandardCharsets
 @Composable
 fun HomeScreen(
     navController: NavHostController,
-    viewModel: CatViewModel,
-    dbViewModel: DbViewModel = hiltViewModel() // Inject DbViewModel
+    viewModel: CatViewModel = hiltViewModel(),
+    dbViewModel: DbViewModel = hiltViewModel()
 ) {
 
     LaunchedEffect(Unit) {
