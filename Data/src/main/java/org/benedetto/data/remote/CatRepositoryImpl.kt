@@ -10,7 +10,7 @@ import okhttp3.Request
 import java.io.IOException
 import javax.inject.Inject
 
-class CatRepositoryImpl @Inject constructor() : CatRepository {
+internal class CatRepositoryImpl @Inject constructor() : CatRepository {
 
     private val client = OkHttpClient()
     private val gson = Gson()
@@ -40,14 +40,3 @@ class CatRepositoryImpl @Inject constructor() : CatRepository {
         }
     }
 }
-
-/*
-// Internal implementation that remains hidden within the data module
-internal class UserRepositoryImpl(
-    private val remoteDataSource: RemoteDataSource
-) : UserRepository {
-    override suspend fun getUserById(userId: String): User {
-        // Fetch user logic
-    }
-}
- */

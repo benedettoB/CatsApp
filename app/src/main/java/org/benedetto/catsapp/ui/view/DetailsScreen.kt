@@ -40,3 +40,55 @@ fun CatDetailsScreen(catId: String?, catImageUrl: String?) {
         }
     }
 }
+
+/*
+@Composable
+fun CatDetailsScreen(catId: String?, catImageUrl: String?) {
+    val catViewModel: CatViewModel = viewModel()
+    val isFavorite = remember { mutableStateOf(catViewModel.isFavorite(catId)) }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        // Display cat details (image, ID, etc.)
+        catImageUrl?.let {
+            Image(
+                painter = rememberImagePainter(it),
+                contentDescription = "Cat Image",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp)
+            )
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Text(text = "Cat ID: $catId", style = MaterialTheme.typography.h6)
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Add to favorites button
+        IconButton(onClick = {
+            isFavorite.value = !isFavorite.value
+            if (isFavorite.value) {
+                catViewModel.addCatToFavorites(catId)
+            } else {
+                catViewModel.removeCatFromFavorites(catId)
+            }
+        }) {
+            Icon(
+                imageVector = if (isFavorite.value) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                contentDescription = "Add to Favorites"
+            )
+        }
+
+        Text(
+            text = if (isFavorite.value) "Added to favorites" else "Not in favorites",
+            style = MaterialTheme.typography.body1
+        )
+    }
+}
+
+ */
