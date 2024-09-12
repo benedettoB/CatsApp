@@ -61,7 +61,7 @@ fun CatListItem(
     cat: Cat,
     isFavorite: Boolean,  // Add isFavorite to determine whether to show the heart icon
     onClick: () -> Unit,
-    onAddToFavorites: () -> Unit  // Add the action to add to favorites
+    onToggleFavorite: () -> Unit  // Toggle favorite instead of only adding
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -82,18 +82,13 @@ fun CatListItem(
 
         Spacer(modifier = Modifier.weight(1f))
 
-        // Show heart icon if the cat is a favorite
-        if (isFavorite) {
+        // Show only one heart icon based on whether the cat is a favorite
+        IconButton(onClick = onToggleFavorite) {
             Icon(
-                imageVector = Icons.Default.Favorite,
-                contentDescription = "Favorite",
-                tint = Color.Red
+                imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                contentDescription = if (isFavorite) "Remove from Favorites" else "Add to Favorites",
+                tint = if (isFavorite) Color.Red else Color.Black
             )
-        }
-
-        // Button to add the cat to favorites
-        IconButton(onClick = onAddToFavorites) {
-            Icon(imageVector = Icons.Default.FavoriteBorder, contentDescription = "Add to Favorites")
         }
     }
 }
@@ -105,7 +100,7 @@ fun CatList(
     cats: List<Cat>,
     favoriteCatIds: List<String>,  // Add favoriteCatIds as a parameter
     onLoadMore: () -> Unit,
-    onAddToFavorites: (String) -> Unit // Add to favorites action
+    onToggleFavorite: (String) -> Unit  // Add to toggle favorites
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
@@ -121,7 +116,7 @@ fun CatList(
                             URLEncoder.encode(cat.url, StandardCharsets.UTF_8.toString())
                         navController.navigate("details/${cat.id}/$encodedImageUrl")
                     },
-                    onAddToFavorites = { cat.id?.let { onAddToFavorites(it) } } // Add to favorites
+                    onToggleFavorite = { cat.id?.let { onToggleFavorite(it) } }  // Toggle favorite status
                 )
             }
         }
@@ -151,6 +146,6 @@ fun CatScreen(
         cats = catState,
         favoriteCatIds = favoriteCats,  // Pass the favorite cat IDs
         onLoadMore = { viewModel.fetchCats() },
-        onAddToFavorites = { catId -> dbViewModel.addToFavorites(catId) } // Add to favorites
+        onToggleFavorite = { catId -> dbViewModel.toggleFavorite(catId) } // Toggle favorites
     )
 }

@@ -1,5 +1,6 @@
 package org.benedetto.catsapp.ui
 
+import CatDetailsScreen
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -9,18 +10,21 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import org.benedetto.catsapp.ui.view.CatDetailsScreen
 import org.benedetto.catsapp.ui.view.HomeScreen
 import org.benedetto.catsapp.ui.viewmodel.CatViewModel
 import org.benedetto.catsapp.ui.viewmodel.DbViewModel
 
 @Composable
-fun Navigation (){
+fun Navigation() {
     val navController = rememberNavController()
-    val catViewModel: CatViewModel = viewModel()
-    MaterialTheme{
-        NavHost(navController = navController , startDestination = "home"){
-            composable("home"){ HomeScreen(navController, catViewModel)}
+    val catViewModel: CatViewModel = viewModel() // CatViewModel
+    val dbViewModel: DbViewModel = hiltViewModel() // DbViewModel for managing favorites
+
+    MaterialTheme {
+        NavHost(navController = navController, startDestination = "home") {
+            composable("home") {
+                HomeScreen(navController, catViewModel, dbViewModel = dbViewModel)
+            }
             // Detail screen with route parameters for catId and catImageUrl
             composable(
                 route = "details/{catId}/{catImageUrl}",
@@ -32,7 +36,8 @@ fun Navigation (){
                 val catId = backStackEntry.arguments?.getString("catId")
                 val catImageUrl = backStackEntry.arguments?.getString("catImageUrl")
 
-                CatDetailsScreen(catId = catId, catImageUrl = catImageUrl)
+                // Pass the dbViewModel to the CatDetailsScreen
+                CatDetailsScreen(catId = catId, catImageUrl = catImageUrl, dbViewModel = dbViewModel)
             }
         }
     }

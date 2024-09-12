@@ -1,6 +1,7 @@
 package org.benedetto.data.repository.local
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import org.benedetto.data.model.FavoriteCat
@@ -15,5 +16,7 @@ interface FavoriteCatDao {
 
     @Query("SELECT catId FROM favorite_cats")
     fun getFavoriteCatIds(): List<String>
-}
 
+    @Delete
+    suspend fun deleteFavoriteCat(favoriteCat: FavoriteCat)
+}

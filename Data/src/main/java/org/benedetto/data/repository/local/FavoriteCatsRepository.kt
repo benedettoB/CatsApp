@@ -16,6 +16,14 @@ class FavoriteCatsRepository @Inject constructor(private val favoriteCatDao: Fav
         }
     }
 
+    suspend fun removeCatFromFavorites(catId: String) {
+        val existingCat = favoriteCatDao.getFavoriteCatById(catId)
+        if (existingCat != null) {
+            favoriteCatDao.deleteFavoriteCat(existingCat)
+        }
+    }
+
+
     suspend fun isCatFavorite(catId: String): Boolean {
         return withContext(Dispatchers.IO) {
             favoriteCatDao.getFavoriteCatById(catId) != null

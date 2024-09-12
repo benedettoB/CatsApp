@@ -38,4 +38,17 @@ class DbViewModel @Inject constructor(private val repository: FavoriteCatsReposi
     fun isCatFavorite(catId: String): Boolean {
         return _favoriteCatIds.value.contains(catId)
     }
+
+    fun toggleFavorite(catId: String) {
+        viewModelScope.launch {
+            if (_favoriteCatIds.value.contains(catId)) {
+                // If it's already a favorite, remove it
+                repository.removeCatFromFavorites(catId)
+            } else {
+                // Otherwise, add it to favorites
+                repository.addCatToFavorites(catId)
+            }
+            loadFavoriteCats() // Reload favorites after toggling
+        }
+    }
 }
