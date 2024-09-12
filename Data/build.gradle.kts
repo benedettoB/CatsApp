@@ -13,7 +13,6 @@ android {
     defaultConfig {
         minSdk = 24
 
-        testInstrumentationRunner = "com.example.template.core.testing.HiltTestRunner"
         consumerProguardFiles("consumer-rules.pro")
 
         // The schemas directory contains a schema file for each version of the Room database.
