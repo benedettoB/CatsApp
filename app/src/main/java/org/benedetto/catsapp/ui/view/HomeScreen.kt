@@ -42,17 +42,17 @@ import java.nio.charset.StandardCharsets
 @Composable
 fun HomeScreen(
     navController: NavHostController,
-    viewModel: CatViewModel = hiltViewModel(),
+    catViewModel: CatViewModel = hiltViewModel(),
     dbViewModel: DbViewModel = hiltViewModel()
 ) {
 
     LaunchedEffect(Unit) {
-        viewModel.fetchCats()
+        catViewModel.fetchCats()
         dbViewModel.loadFavoriteCats() // Load favorite cats when the screen is loaded
     }
 
     MaterialTheme {
-        CatScreen(navController, viewModel, dbViewModel)
+        CatScreen(navController, catViewModel, dbViewModel)
     }
 }
 

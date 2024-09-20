@@ -13,6 +13,10 @@ import org.benedetto.catsapp.ui.view.HomeScreen
 import org.benedetto.catsapp.ui.viewmodel.CatViewModel
 import org.benedetto.catsapp.ui.viewmodel.DbViewModel
 
+/*
+ using hiltViewModel() as it is designed to work with composable functions
+ use by viewModel() inside activities/fragments that don't use compose functions
+ */
 @Composable
 fun Navigation() {
     val navController = rememberNavController()

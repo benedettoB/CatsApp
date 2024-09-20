@@ -14,10 +14,5 @@ class MainActivity : ComponentActivity() {
         setContent {
             Navigation()
         }
-        if(isNetworkAvailable()){
-            toast("Fetching cats from the network")
-        }else{
-            toast("Connect to the internet to fetch cats")
-        }
     }
 }
