@@ -1,7 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
+    //alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.ksp.plug)
     alias(libs.plugins.kotlin.parcelize)
 }
 
@@ -24,13 +25,17 @@ android {
 }
 
 dependencies {
+    implementation(libs.coroutines)
     implementation(libs.okhttp)
     implementation(libs.gson)
     // Arch Components
+    //kapt(libs.androidx.room.compiler)
+    ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
+    //kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 
     testImplementation(libs.junit)
     testImplementation(libs.hilt.android.testing)

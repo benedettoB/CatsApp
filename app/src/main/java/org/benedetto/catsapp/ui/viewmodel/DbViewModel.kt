@@ -4,10 +4,12 @@ package org.benedetto.catsapp.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.benedetto.data.repository.local.FavoriteCatsRepository
 import javax.inject.Inject
 
@@ -54,14 +56,16 @@ class DbViewModel @Inject constructor(private val repository: FavoriteCatsReposi
     }
 
     fun loadFavoriteCats() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             val favorites = repository.getFavoriteCatIds()
-            _favoriteCatIds.value = favorites
+            withContext(Dispatchers.Main){
+                _favoriteCatIds.value = favorites
+            }
         }
     }
 
     fun addToFavorites(catId: String) {
-        viewModelScope.launch {
+        viewModelScope.launch{
             repository.addCatToFavorites(catId)
             loadFavoriteCats() // Reload favorites after adding
         }
@@ -73,7 +77,7 @@ class DbViewModel @Inject constructor(private val repository: FavoriteCatsReposi
 
     fun toggleFavorite(catId: String) {
         viewModelScope.launch {
-            if (_favoriteCatIds.value.contains(catId)) {
+            if (isCatFavorite(catId)) {
                 // If it's already a favorite, remove it
                 repository.removeCatFromFavorites(catId)
             } else {

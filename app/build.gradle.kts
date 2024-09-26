@@ -2,7 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.hilt.gradle)
-    alias(libs.plugins.kotlin.kapt)
+    //alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.ksp.plug)
     alias(libs.plugins.compose.compiler)
 }
 
@@ -51,6 +52,7 @@ android {
 
 dependencies {
     implementation(project(":Data"))
+    implementation(libs.coroutines)
     // Core Android dependencies
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -59,7 +61,8 @@ dependencies {
     // Hilt Dependency Injection
     implementation(libs.hilt.android)
     implementation(libs.androidx.material3)
-    kapt(libs.hilt.compiler)
+    //kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 
     // Arch Components
     implementation(libs.androidx.lifecycle.runtime.compose)

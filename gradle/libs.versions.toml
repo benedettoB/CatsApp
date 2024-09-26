@@ -10,7 +10,9 @@ androidxRoom = "2.6.1"
 hilt = "2.52"
 junit = "4.13.2"
 kotlin = "2.0.10"
+coroutineVersion = "1.7.3"
 [libraries]
+coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutineVersion" }
 okhttp = { module = "com.squareup.okhttp3:okhttp", version = "4.9.3" }
 gson = { module = "com.google.code.gson:gson", version = "2.10.1"}
 coil = { module = "io.coil-kt:coil-compose", version = "1.4.0" }
@@ -30,6 +32,7 @@ androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "androidxNavigation" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "androidxRoom" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "androidxRoom" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidxRoom"}
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
@@ -40,7 +43,6 @@ android-library = { id = "com.android.library", version.ref = "androidGradlePlug
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 hilt-gradle = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+#kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version = "1.8.0" }
-
-
+ksp-plug = {id = "com.google.devtools.ksp", version = "2.0.10-1.0.24"}
