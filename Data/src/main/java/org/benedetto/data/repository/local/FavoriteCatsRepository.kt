@@ -1,8 +1,12 @@
 package org.benedetto.data.repository.local
 
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 import org.benedetto.data.model.FavoriteCat
+import org.benedetto.data.util.log
 import javax.inject.Inject
 
 class FavoriteCatsRepository @Inject constructor(private val favoriteCatDao: FavoriteCatDao) {
@@ -16,6 +20,7 @@ class FavoriteCatsRepository @Inject constructor(private val favoriteCatDao: Fav
         }
 
     }
+
     suspend fun removeCatFromFavorites(catId: String) {
         withContext(Dispatchers.IO){
             val existingCat = favoriteCatDao.getFavoriteCatById(catId)
@@ -24,11 +29,10 @@ class FavoriteCatsRepository @Inject constructor(private val favoriteCatDao: Fav
             }
         }
     }
-    suspend fun isCatFavorite(catId: String): Boolean {
-        return favoriteCatDao.getFavoriteCatById(catId) != null
 
-    }
-   suspend fun getFavoriteCatIds(): List<String> {
-        return favoriteCatDao.getFavoriteCatIds()
-    }
+    fun getFavoriteCats(): Flow<List<String>> = flow {
+        log("emitting on background thread")
+        emit(favoriteCatDao.getFavoriteCatIds())
+    }.flowOn(Dispatchers.IO)
+
 }

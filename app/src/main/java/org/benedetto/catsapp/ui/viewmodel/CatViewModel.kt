@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.buffer
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
@@ -19,7 +20,7 @@ import kotlin.system.measureTimeMillis
 class CatViewModel @Inject constructor(private val catRepository: CatRepository) : ViewModel() {
 
     private val _catState = MutableStateFlow<List<Cat>>(emptyList())
-    val catState: StateFlow<List<Cat>> = _catState
+    val catState: StateFlow<List<Cat>> = _catState.asStateFlow()
 
     fun fetchCats() {
         val time = measureTimeMillis {
