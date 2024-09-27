@@ -8,7 +8,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal abstract class RepositoryModule {
+internal abstract class CatRepositoryModule {
 
     @Binds
     @Singleton
