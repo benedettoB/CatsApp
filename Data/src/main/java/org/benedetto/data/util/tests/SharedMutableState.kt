@@ -1,4 +1,4 @@
-package org.benedetto.data.util
+package org.benedetto.data.util.tests
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
@@ -8,6 +8,7 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
+import org.benedetto.data.util.log
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.system.measureTimeMillis
 

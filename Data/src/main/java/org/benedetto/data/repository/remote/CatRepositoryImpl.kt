@@ -1,4 +1,5 @@
 package org.benedetto.data.repository.remote
+
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -17,27 +18,26 @@ internal class CatRepositoryImpl @Inject constructor() : CatRepository {
     private val gson = Gson()
 
     override fun fetchCats(): Flow<List<Cat>> = flow {
-        val cats = fetchCatData() // Fetch cat data on background thread
-        log("emitting on background thread")
-        emit(cats.toList()) // Emit the results
-    }.flowOn(Dispatchers.IO)
+        val cats = fetchCatData()
+        emit(cats.toList())
+    }.flowOn(Dispatchers.IO)// now all code that runs in between flow{...} runs in background thread
 
     private fun fetchCatData(): Array<Cat> {
         log("inside coroutine context Dispatchers.IO ")
         val request = Request.Builder()
             .url("https://api.thecatapi.com/v1/images/search?limit=5")
             .build()
-            val response = client.newCall(request).execute()
-            if (response.isSuccessful) {
-                val responseBody = response.body?.string()
-                if (responseBody != null) {
-                   return gson.fromJson(responseBody, Array<Cat>::class.java)
-                } else {
-                    throw IOException("Response body is null")
-                }
+        val response = client.newCall(request).execute()
+        if (response.isSuccessful) {
+            val responseBody = response.body?.string()
+            if (responseBody != null) {
+                return gson.fromJson(responseBody, Array<Cat>::class.java)
             } else {
-                throw IOException("Unexpected code $response")
+                throw IOException("Response body is null")
             }
+        } else {
+            throw IOException("Unexpected code $response")
+        }
     }
 }
 

@@ -1,4 +1,4 @@
-package org.benedetto.data.util
+package org.benedetto.data.util.tests
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.runBlocking
+import org.benedetto.data.util.log
 import kotlin.system.measureTimeMillis
 
 class AsynchronousFlow {

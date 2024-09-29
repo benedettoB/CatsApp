@@ -1,9 +1,10 @@
-package org.benedetto.data.util
+package org.benedetto.data.util.tests
 
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import org.benedetto.data.util.log
 import kotlin.concurrent.thread
 import kotlin.system.measureTimeMillis
 
@@ -57,7 +58,7 @@ object CoroutineBasics {
 
     fun threadingCompared(){
         val time = measureTimeMillis {
-            repeat(10_000) { // launch a lot of coroutines
+            repeat(10_000) { // launch a lot of threads
                 thread {
                     Thread.sleep(5000L)
                     log("threadingCompared() ")
@@ -84,8 +85,6 @@ object CoroutineBasics {
         log("thirdCoroutine() Hello")
     }
 
-
-    // this is your first suspending function
     private suspend fun secondCoroutine() {
         delay(1000L)
         log("secondCoroutine() World!")
