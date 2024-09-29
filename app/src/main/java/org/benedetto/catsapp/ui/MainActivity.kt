@@ -11,11 +11,6 @@ import org.benedetto.data.extension.toast
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //savedInstanceState.getBoolean("key") throws error
-        //val locked: Boolean? = savedInstanceState?.getBoolean("locked")//safe call ?. operator is savedInstance is null, null will be returned else statements to right of ?. will be executed
-         val locked: Boolean = savedInstanceState?.getBoolean("locked") ?: false
-        //savedInstanceState?.let { println(it.getBoolean("isLocked")) }
-
         setContent {
             Navigation()
         }
